@@ -183,22 +183,63 @@ function toggleError(flag, label, input, errorBox, errorMessage = '') {
 function makeResult(userDay, userMonth, userYear) {
     const currentDate = new Date()
 
-    const currentDay = currentDate.getDay()
-    const currentMonth = currentDate.getMonth() + 1
+    const currentDay = currentDate.getDate()
+    const currentMonth = currentDate.getMonth()
     const currentYear = currentDate.getFullYear()
 
     let yearResult
     let monthResult
     let dayResult
 
-    // se o mes atual >= mesAniversario
-    if (currentMonth >= userMonth) {
+    if (currentMonth > userMonth) {
         yearResult = currentYear - userYear
-    } else {
-        
     }
 
+    if (currentMonth === userMonth) {
+        if (currentDay >= userDay) {
+            yearResult = currentYear - userYear
+        } else {
+            yearResult = (currentYear - userYear) - 1
+        }
+    }
+
+    if (currentMonth < userMonth) { yearResult = (currentYear - userYear) - 1 }
+
+    monthResult = currentDay >= userDay ? currentMonth - userMonth + 1 : ((currentMonth - userMonth) - 1) + 1
+
+    if (monthResult < 0) monthResult += 12
+
+    dayResult = currentDay >= userDay ? currentDay - userDay : HowManyDays(currentMonth - 1) - (userDay - currentDay)
+
+
+    const dayResultField = appData.dayResult()
+    const monthResultField = appData.monthResult()
+    const yearResultField = appData.yearResult()
+
+    animateResult(dayResult, dayResultField)
+    animateResult(monthResult, monthResultField)
+    animateResult(yearResult, yearResultField)
+
 }
+
+function HowManyDays(month) {
+    if (month < 0) return 11
+    if (month === 1) { return 28 }
+    if (month === 3 || month === 5 || month === 8 || month === 10) { return 30 }
+    return 31
+}
+
+function animateResult(finalValue, field) {
+    let i = 0
+    const interval = setInterval(() => {
+        field.innerText = i
+        i++
+        if (i > finalValue) {
+            clearInterval(interval)
+        }
+    }, 50)
+}
+
 
 appData.form().addEventListener('submit', function (e) {
     e.preventDefault()
@@ -206,5 +247,7 @@ appData.form().addEventListener('submit', function (e) {
     const day = Number(appData.day().value)
     const month = Number(appData.month().value)
     const year = Number(appData.year().value)
+
+    console.log(makeResult(day, month, year))
 
 })

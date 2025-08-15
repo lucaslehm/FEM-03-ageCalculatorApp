@@ -19,6 +19,7 @@
 body {
     background-color: var(--cor1);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -139,4 +140,27 @@ button > img {
 
 .label-error {
     color: #cc7d7d;
+}
+
+footer {
+    padding: 1em;
+    border-radius: 1em;
+    background-color: var(--cor2);
+    margin-top: 2em;
+    justify-self: flex-end;
+}
+
+footer > p {
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+footer > p > a {
+    color: var(--cor3);
+    text-decoration: none;
+}
+
+footer > p > a:hover {
+    color: #503291;
+    text-decoration: underline;
 }
