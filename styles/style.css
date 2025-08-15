@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    color: var(--cor4);
+}
+
+:root {
+    --cor1: #ececec;
+    --cor2: #FFFFFF;
+    --cor3: #864CFF;
+    --cor4: #151515;
+    --cor5: #6D6D6D;
+}
+
+body {
+    background-color: var(--cor1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.age-calculator-container {
+    background-color: var(--cor2);
+    padding: 3em;
+    border-radius: 2em 2em 9em 2em;
+    width: 650px;
+}
+
+.age-calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.form-data-area {
+    display: flex;
+    gap: 1em;
+}
+
+.form-input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    font-size: .9em;
+    color: var(--cor5);
+}
+
+input  {
+    font-size: 1em;
+    width: 150px;
+    padding: 1em .6em;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    border: var(--cor5) solid 1px;
+    border-radius: .5em;
+    font-weight: 600;
+}
+
+input:focus {
+    border: var(--cor3) solid 1px;
+}
+
+input.input-error {
+    border: #cc7d7d solid 1px;
+}
+
+button {
+    background-color: var(--cor3);
+    border: none;
+    outline: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-end;
+    cursor: pointer;
+    transition: all ease  .2s;
+}
+
+button:hover {
+    background-color: var(--cor4);
+}
+
+button[disabled] {
+    cursor: default;
+    background-color: var(--cor5);
+}
+
+button[disabled]:hover {
+    background-color: var(--cor5);
+}
+
+button > img {
+    width: 30px;
+    height: 30px;
+}
+
+.result-text {
+    font-weight: 800;
+    font-style: italic;
+    font-size: 3.5em;
+}
+
+.result-color {
+    color: var(--cor3);
+}
+
+.form-submit-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.horizontal-divider {
+    background-color:#15151534;
+    width: 85%;
+    height: 1px;
+}
+
+.error-message {
+    color: #cc7d7d;
+    font-weight: 600;
+    font-size: .8em;
+    margin-top: .2em;
+    width: 150px;
+}
+
+
+.label-error {
+    color: #cc7d7d;
+}

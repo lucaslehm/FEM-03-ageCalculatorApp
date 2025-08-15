@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Idade</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="shortcut icon" href="images/favicon-32x32.png" type="image/x-icon">
+</head>
+<body>
+
+    <main class="age-calculator-container">
+
+        <section class="age-calc-data-input-container">
+
+            <form class="age-calc-form">
+
+                <div class="form-data-area">
+
+                    <div class="form-input-box">
+                        <label id="dayLabel" for="day">Dia</label>
+                        <input type="number" name="name__day" id="day" placeholder="dd" onchange="validateDay()">
+                        <p id="dayErrorMessageText" class="error-message" style="display: none;">error message</p>
+                    </div>
+
+                    <div class="form-input-box">
+                        <label id="monthLabel" for="month">Mês</label>
+                        <input type="number" name="name__month" id="month" placeholder="mm" onchange="validateMonth()">
+                        <p id="monthErrorMessageText" class="error-message" style="display: none;">error message</p>
+                    </div>
+
+                    <div class="form-input-box">
+                        <label id="yearLabel" for="year">Ano</label>
+                        <input type="number" name="name__year" id="year" placeholder="yyyy" onchange="
+                        validateYear()">
+                        <p id="yearErrorMessageText" class="error-message" style="display: none;">error message</p>
+                    </div>
+
+                </div>
+
+                <div class="form-submit-area">
+                    <div class="horizontal-divider"></div>
+                    <button id="submitButton" disabled><img src="images/icon-arrow.svg" alt="seta-para-baixo"></button>
+                </div>
+                
+            </form>
+
+        </section>
+        
+        <section class="age-calc-result">
+
+            <div class="year-result-container">
+                <p class="result-text"><span id="dayResult" class="result-color">--</span> Anos</p>
+            </div>
+            <div class="month-result-container">
+                <p class="result-text"><span id="monthResult" class="result-color">--</span> Meses</p>
+            </div>
+            <div class="day-result-container">
+                <p class="result-text"><span id="yearResult" class="result-color">--</span> Dias</p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="scripts/app.js"></script>
+
+</body>
+</html>
