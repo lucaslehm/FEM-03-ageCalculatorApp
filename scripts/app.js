@@ -107,7 +107,7 @@ function validateYear() {
         return
     }
     // Ano deve ser menor que 2025
-    if (isYearValid(year)) {
+    if (isYearValid(year) && year > 0) {
         toggleError(
             false,
             appData.yearLabel(),
@@ -132,7 +132,11 @@ function validDate(day, month, year) {
         return false
     }
 
-    if (validDayForTheMonth(day, month)) {
+    if (day <= 0 || month <= 0 || year <= 0) {
+        return false
+    }
+
+    if (isInvalidDayForTheMonth(day, month, year)) {
         return false
     }
 
@@ -140,7 +144,8 @@ function validDate(day, month, year) {
 
 }
 
-function validDayForTheMonth(day, month) {
+function isInvalidDayForTheMonth(day, month, year) {
+    if (month === 2 && isLeapYear(year)) { return day > 29 ? true : false }
     if (month === 2) { return day > 28 ? true : false }
     if (month === 4 || month === 6 || month === 9 || month === 11) { return day > 30 ? true : false }
     return false
@@ -155,7 +160,7 @@ function isMonthValid(month) {
 }
 
 function isYearValid(year) {
-    return year <= 2025 ? true : false
+    return year <= new Date().getFullYear() ? true : false
 }
 
 function toggleButtonDisable() {
@@ -191,9 +196,7 @@ function makeResult(userDay, userMonth, userYear) {
     let monthResult
     let dayResult
 
-    if (currentMonth > userMonth) {
-        yearResult = currentYear - userYear
-    }
+    if (currentMonth > userMonth) { yearResult = currentYear - userYear}
 
     if (currentMonth === userMonth) {
         if (currentDay >= userDay) {
@@ -209,7 +212,7 @@ function makeResult(userDay, userMonth, userYear) {
 
     if (monthResult < 0) monthResult += 12
 
-    dayResult = currentDay >= userDay ? currentDay - userDay : HowManyDays(currentMonth - 1) - (userDay - currentDay)
+    dayResult = currentDay >= userDay ? currentDay - userDay : HowManyDays(currentMonth - 1, currentYear) - (userDay - currentDay)
 
 
     const dayResultField = appData.dayResult()
@@ -222,8 +225,9 @@ function makeResult(userDay, userMonth, userYear) {
 
 }
 
-function HowManyDays(month) {
+function HowManyDays(month, year) {
     if (month < 0) return 11
+    if (month === 1 && isLeapYear(year)) return 29
     if (month === 1) { return 28 }
     if (month === 3 || month === 5 || month === 8 || month === 10) { return 30 }
     return 31
@@ -248,6 +252,8 @@ appData.form().addEventListener('submit', function (e) {
     const month = Number(appData.month().value)
     const year = Number(appData.year().value)
 
-    console.log(makeResult(day, month, year))
-
+    makeResult(day, month, year)
 })
+
+
+const isLeapYear = (year) => year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
