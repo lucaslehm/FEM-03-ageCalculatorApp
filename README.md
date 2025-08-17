@@ -12,7 +12,7 @@ O objetivo era construir um aplicativo que calcula a idade de uma pessoa com bas
 
 ## 🚀 Demo
 
-🔗 [Clique aqui para ver o projeto online](https://age-calculator-app-lucas.vercel.app)
+🔗 [Clique aqui para ver o projeto online](https://age-calculator-app-phi-ten.vercel.app/)
 
 ---
 
