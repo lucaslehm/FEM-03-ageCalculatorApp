@@ -1,14 +1,14 @@
-// Lugar principal daonde vem os dados
-
+// Objeto principal aonde vao ficar os dados
+// Main object where the data will be stored
 const appData = {
-    // Formulario
+    // Formulário - Form
     form: () => document.querySelector('.age-calc-form'),
     day: () => document.querySelector('#day'),
     month: () => document.querySelector('#month'),
     year: () => document.querySelector('#year'),
     submitButton: () => document.querySelector('#submitButton'),
 
-    // Resultado
+    // divs de resultado - results divs
     dayResult: () => document.querySelector('#dayResult'),
     monthResult: () => document.querySelector('#monthResult'),
     yearResult: () => document.querySelector('#yearResult'),
@@ -18,17 +18,17 @@ const appData = {
     monthLabel: () => document.querySelector('#monthLabel'),
     yearLabel: () => document.querySelector('#yearLabel'),
 
-    // Mensagens de erro
+    // Mensagens de erro - Error messages
     dayErrorMessage: () => document.querySelector('#dayErrorMessageText'),
     monthErrorMessage: () => document.querySelector('#monthErrorMessageText'),
     yearErrorMessage: () => document.querySelector('#yearErrorMessageText')
 }
 
-// validar o campo dia
+// Validar o campo dia - Validate the day field
 function validateDay() {
     const day = Number(appData.day().value)
 
-    // verifica se o campo está vazio
+    // Verifica se o campo está vazio - Checks if the field is empty
     if (!day) {
         toggleError(
             true,
@@ -39,7 +39,7 @@ function validateDay() {
         )
         return
     }
-    // dia tem que estar entre 0 e 31
+    // dia tem que estar entre 0 e 31 - Day must be between 0 and 31
     if (isDayValid(day)) {
         toggleError(
             false,
@@ -59,6 +59,7 @@ function validateDay() {
     }
 }
 
+// Validar o campo mês - Validate the month field
 function validateMonth() {
     const month = Number(appData.month().value)
 
@@ -72,7 +73,7 @@ function validateMonth() {
         )
         return
     }
-    // mes tem que estar entre 0 e 12
+    // Mes tem que estar entre 0 e 12 - Month must be between 0 and 12
     if (isMonthValid(month)) {
         toggleError(
             false,
@@ -92,7 +93,7 @@ function validateMonth() {
     }
 }
 
-
+// Validar o campo ano - Validate the year field
 function validateYear() {
     const year = Number(appData.year().value)
 
@@ -106,8 +107,9 @@ function validateYear() {
         )
         return
     }
-    // Ano deve ser menor que 2025
-    if (isYearValid(year) && year > 0) {
+    // Ano deve ser menor que 2025 e maior que 1800
+    // Year must be less than 2025 and greater than 1800
+    if (isYearValid(year) && year > 1800) {
         toggleError(
             false,
             appData.yearLabel(),
@@ -121,29 +123,26 @@ function validateYear() {
             appData.yearLabel(),
             appData.year(),
             appData.yearErrorMessage(),
-            'Ano não pode ser maior que 2025'
+            `Ano deve estar entre ${new Date().getFullYear()} e 1800`
         )
     }
 }
 
+// Verifica se é uma data valida - Check if it is a valid date
 function validDate(day, month, year) {
 
-    if (day == '' || month == '' || year == '') {
-        return false
-    }
+    if (day == '' || month == '' || year == '') { return false }
 
-    if (day <= 0 || month <= 0 || year <= 0) {
-        return false
-    }
+    if (day <= 0 || month <= 0 || year <= 0) { return false }
 
-    if (isInvalidDayForTheMonth(day, month, year)) {
-        return false
-    }
+    if (isInvalidDayForTheMonth(day, month, year)) { return false }
 
     return true
 
 }
 
+// Verificar se o dia é valido para o mes inserido
+// Check if the day is valid for the month entered
 function isInvalidDayForTheMonth(day, month, year) {
     if (month === 2 && isLeapYear(year)) { return day > 29 ? true : false }
     if (month === 2) { return day > 28 ? true : false }
@@ -151,18 +150,22 @@ function isInvalidDayForTheMonth(day, month, year) {
     return false
 }
 
+// Valida o dia - Day check
 function isDayValid(day) {
     return day >= 1 && day <= 31 ? true : false
 }
 
+// Valida o mês - Month check
 function isMonthValid(month) {
     return month >= 1 && month <= 12 ? true : false
 }
 
+// Valida o ano - Year check
 function isYearValid(year) {
     return year <= new Date().getFullYear() ? true : false
 }
 
+// Ativa e desativa o botao caso necessario - Activate and deactivate the button if necessary
 function toggleButtonDisable() {
     const day = Number(appData.day().value)
     const month = Number(appData.month().value)
@@ -171,7 +174,7 @@ function toggleButtonDisable() {
     appData.submitButton().disabled = validDate(day, month, year) ? false : true
 }
 
-
+// Lança mensagens de erro - Throws error messages
 function toggleError(flag, label, input, errorBox, errorMessage = '') {
     if (flag) {
         label.classList.add('label-error')
@@ -185,6 +188,7 @@ function toggleError(flag, label, input, errorBox, errorMessage = '') {
     }
 }
 
+// Funcao que faz o resultado de fato - Function that actually makes the result
 function makeResult(userDay, userMonth, userYear) {
     const currentDate = new Date()
 
@@ -225,6 +229,8 @@ function makeResult(userDay, userMonth, userYear) {
 
 }
 
+// Funcao que verifica quantos dias teve no mes anterior
+// Function that checks how many days you had in the previous month
 function HowManyDays(month, year) {
     if (month < 0) return 11
     if (month === 1 && isLeapYear(year)) return 29
@@ -233,6 +239,7 @@ function HowManyDays(month, year) {
     return 31
 }
 
+// Funcao par "animar" o resultado - Function to "animate" the result
 function animateResult(finalValue, field) {
     let i = 0
     const interval = setInterval(() => {
@@ -244,7 +251,8 @@ function animateResult(finalValue, field) {
     }, 50)
 }
 
-
+// Escutador de evento do form para chamar a funcao de resultado
+// Form event listener to call the result function
 appData.form().addEventListener('submit', function (e) {
     e.preventDefault()
 
@@ -255,5 +263,6 @@ appData.form().addEventListener('submit', function (e) {
     makeResult(day, month, year)
 })
 
-
+// Funcao para saber se o ano é ou nao bissexto
+// Function to know if the year is a leap year or not
 const isLeapYear = (year) => year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)

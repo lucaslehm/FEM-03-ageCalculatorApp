@@ -54,7 +54,7 @@ label {
     color: var(--cor5);
 }
 
-input  {
+input {
     font-size: 1em;
     width: 150px;
     padding: 1em .6em;
@@ -86,7 +86,7 @@ button {
     justify-content: center;
     justify-self: flex-end;
     cursor: pointer;
-    transition: all ease  .2s;
+    transition: all ease .2s;
 }
 
 button:hover {
@@ -102,7 +102,7 @@ button[disabled]:hover {
     background-color: var(--cor5);
 }
 
-button > img {
+button>img {
     width: 30px;
     height: 30px;
 }
@@ -124,7 +124,7 @@ button > img {
 }
 
 .horizontal-divider {
-    background-color:#15151534;
+    background-color: #15151534;
     width: 85%;
     height: 1px;
 }
@@ -150,17 +150,87 @@ footer {
     justify-self: flex-end;
 }
 
-footer > p {
+footer>p {
     font-weight: 500;
     font-size: 0.9em;
 }
 
-footer > p > a {
+footer>p>a {
     color: var(--cor3);
     text-decoration: none;
 }
 
-footer > p > a:hover {
+footer>p>a:hover {
     color: #503291;
     text-decoration: underline;
+}
+
+@media screen and (max-width: 700px) {
+
+    .age-calculator-container {
+        padding: 2em;
+        width: 500px;
+        transition: all ease .2s;
+        border-radius: 1.5em 1.5em 7.5em 1.5em;
+    }
+
+    input {
+        width: 120px;
+        padding: 1em .6em;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    .age-calculator-container {
+        padding: 2em;
+        width: 340px;
+        border-radius: 1.5em 1.5em 7.5em 1.5em;
+    }
+
+    input {
+        width: 80px;
+        padding: 1em .6em;
+        font-size: .9em;
+    }
+
+    button {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: calc(50% - 2em);
+    }
+
+    button>img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .horizontal-divider {
+        width: 100%;
+        margin: 1.5em 0;
+    }
+
+    .result-text {
+        font-size: 3em;
+    }
+
+    footer {
+        padding: .5em;
+        border-radius: .6em;
+    }
+
+    footer>p {
+        font-weight: 600;
+        font-size: 0.7em;
+    }
+
+    .error-message {
+        font-weight: 900;
+        font-size: .7em;
+        margin-top: .2em;
+        width: 80px;
+    }
+
 }
